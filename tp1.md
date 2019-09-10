@@ -199,3 +199,45 @@ Si on supprime le fichier toto, le fichier titi existe toujours avec l'ancien co
 
 __12. Créez à présent un lien symbolique tutu sur titi avec la commande ln -s titi tutu. Modifiez le contenu de titi; quelle conséquence pour tutu? Et inversement? Supprimez le fichier titi; quelle conséquence cela a-t-il sur tutu?__
 
+```
+thomas@ubuntu-server:~$ ln -s titi tutu
+thomas@ubuntu-server:~$ echo 'titi modifié' > titi
+thomas@ubuntu-server:~$ cat tutu
+titi modifié
+thomas@ubuntu-server:~$ echo 'tutu modifié' > tutu
+thomas@ubuntu-server:~$ cat titi
+tutu modifié
+thomas@ubuntu-server:~$ rm titi
+thomas@ubuntu-server:~$ cat tutu
+cat: tutu: No such file or directory
+```
+
+Lorsque titi est modifié, tutu aussi change quand on l'affiche avec cat et vice versa
+
+Quand on supprime titi, on ne peut plus afficher tutu car titi a été supprimé.
+
+__13. Affichez à l’écran le fichier /var/log/syslog. Quels raccourcis clavier permettent d’interrompre et
+reprendre le défilement à l’écran ?__
+
+CTRL + S pour arreter et CTRL + Q pour reprendre
+
+__14. Affichez les 5 premières lignes du fichier /var/log/syslog, puis les 15 dernières, puis seulement les
+lignes 10 à 20.__
+
+cat /var/log/syslog | head -5
+
+Commande head permet d'afficher les premières lignes d'un fichier
+
+cat /var/log/syslog | tail -15
+
+Commande tail permet d'afficher les dernière lignes d'un fichier
+
+cat /var/log/syslog | head -20 | tail -11
+
+Pour afficher 11 lignes de 10 à 20
+
+__15. Que fait la commande dmesg | less ?__
+
+Affiche la première page de /var/log/syslog grâce à la commande less
+
+

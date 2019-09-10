@@ -318,4 +318,5 @@ Non il n'apparait pas car il n'a pas été indexé
 ## Exercice 4. Personnalisation du shell
 
 Code PS1 sans couleurs : PS1='[\t] - \u@\h:\w '
+
 Code pour le PS1 avec couleurs : PS1='\[\033[35m\][\t] \[\033[00m\] - \[\033[92m\]\u@\h\[\033[00m\]:\[\033[36m\]\w\[\033[00m\] '

@@ -224,15 +224,15 @@ CTRL + S pour arreter et CTRL + Q pour reprendre
 __14. Affichez les 5 premières lignes du fichier /var/log/syslog, puis les 15 dernières, puis seulement les
 lignes 10 à 20.__
 
-cat /var/log/syslog | head -5
+*cat /var/log/syslog | head -5*
 
 Commande head permet d'afficher les premières lignes d'un fichier
 
-cat /var/log/syslog | tail -15
+*cat /var/log/syslog | tail -15*
 
 Commande tail permet d'afficher les dernière lignes d'un fichier
 
-cat /var/log/syslog | head -20 | tail -11
+*cat /var/log/syslog | head -20 | tail -11*
 
 Pour afficher 11 lignes de 10 à 20
 
@@ -241,3 +241,81 @@ __15. Que fait la commande dmesg | less ?__
 Affiche la première page de /var/log/syslog grâce à la commande less
 
 
+__16. Affichez à l’écran le fichier /etc/passwd ; que contient-il ? Quelle commande permet d’afficher la page
+de manuel de ce fichier ?__
+
+Il affiche les utilisateurs et des informations sur eux, comme leur ID, leur ID de groupe, le répertoire home de l'utilisateur et quel shell il utilise.
+
+Pour afficher le manuel : man passwd
+
+__17. Affichez seulement la première colonne triée par ordre alphabétique inverse__
+
+_cat /etc/passwd | cut -d: -f1 | sort -r_
+
+Cut pour séparer et sort pour trier
+
+__18. Quelle commande nous donne le nombre d’utilisateurs ?__
+
+_cat /etc/passwd | wc -l_
+
+wc -l permet de compte le nombres de lignes
+
+__19. Combien de pages de manuel comportent le mot-clé conversion dans leur description ?__
+
+man -k conversion | wc -l
+
+Il y en a 4
+
+__20. A l’aide de la commande find, recherchez tous les fichiers se nommant passwd présents sur la machine__
+
+```
+thomas@ubuntu-server:~$ sudo find / -name passwd
+/snap/core/6673/etc/cron.daily/passwd
+/snap/core/6673/etc/pam.d/passwd
+/snap/core/6673/etc/passwd
+/snap/core/6673/usr/bin/passwd
+/snap/core/6673/usr/share/bash-completion/completions/passwd
+/snap/core/6673/usr/share/doc/passwd
+/snap/core/6673/var/lib/extrausers/passwd
+/usr/bin/passwd
+/usr/share/lintian/overrides/passwd
+/usr/share/bash-completion/completions/passwd
+/usr/share/doc/passwd
+/etc/pam.d/passwd
+/etc/passwd
+/etc/cron.daily/passwd
+```
+
+find / -name passwd permet d'afficher tout les fichiers portant le nom passwd dans /
+
+__21. Modifiez la commande précédente pour que la liste des fichiers trouvés soit enregistrée dans le fichier
+~/list_passwd_files.txt et que les erreurs soient redirigées vers le fichier spécial /dev/null__
+
+find / -name passwd > ~/list_passwd_files.txt 2> /dev/null
+
+__22. Dans votre dossier personnel, utilisez la commande grep pour chercher où est défini l’alias ll vu
+précédemment__
+
+_cat .* | grep ll_
+
+J'utilise .* pour que cat affiche le contenu de tout les fichiers caché de mon répertoire personnel et grep pour afficher uniquement les lignes contenant la correspondance "ll"
+
+__23. Utilisez la commande locate pour trouver le fichier history.log__
+
+```
+thomas@ubuntu-server:~$ locate history.log
+/var/log/apt/history.log
+```
+
+__24. Créer un fichier dans votre dossier personnel puis utilisez locate pour le trouver. Apparaît-il ? Pourquoi ?__
+
+Non il n'apparait pas car il n'a pas été indexé
+
+## Exercice 3. Découverte de l’éditeur de texte nano
+
+**FAIT**
+
+## Exercice 4. Personnalisation du shell
+
+Code PS1 sans couleurs : PS1='[\t] - \u@\h:\w '
+Code pour le PS1 avec couleurs : PS1='\[\033[35m\][\t] \[\033[00m\] - \[\033[92m\]\u@\h\[\033[00m\]:\[\033[36m\]\w\[\033[00m\] '
